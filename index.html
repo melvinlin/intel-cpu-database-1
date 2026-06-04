@@ -1,885 +1,1771 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+
+<html lang=zh-CN>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Intel CPU 鏁版嵁搴?(2005-2025) - 杩戜簩鍗佸勾澶勭悊鍣ㄥ叏瑙?/title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <meta charset=UTF-8>
+
+    <meta name=viewport content=width=device-width, initial-scale=1.0>
+
+    <title>Intel CPU 数据库 (2005-2025) - 近二十年处理器全览</title>
+
     <style>
+
         :root {
+
             --primary: #0071c5;
+
             --primary-dark: #005a9e;
+
             --secondary: #6c757d;
+
             --success: #28a745;
+
             --danger: #dc3545;
+
             --warning: #ffc107;
+
             --info: #17a2b8;
+
             --light: #f8f9fa;
+
             --dark: #343a40;
+
             --gray: #6c757d;
+
             --gray-light: #e9ecef;
+
             --border: #dee2e6;
+
             --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
             --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+
             --radius: 8px;
+
             --radius-lg: 12px;
+
         }
+
+
 
         * {
+
             margin: 0;
+
             padding: 0;
+
             box-sizing: border-box;
+
         }
+
+
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+
             line-height: 1.6;
+
             color: #333;
+
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+
             min-height: 100vh;
+
         }
+
+
 
         .container {
+
             max-width: 1200px;
+
             margin: 0 auto;
+
             padding: 20px;
+
         }
+
+
 
         header {
+
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+
             color: white;
+
             padding: 2rem 0;
+
             border-radius: var(--radius-lg);
+
             margin-bottom: 2rem;
+
             box-shadow: var(--shadow-lg);
+
             position: relative;
+
             overflow: hidden;
+
         }
+
+
 
         header::before {
+
             content: '';
+
             position: absolute;
+
             top: -50%;
+
             right: -20%;
+
             width: 300px;
+
             height: 300px;
+
             background: rgba(255, 255, 255, 0.1);
+
             border-radius: 50%;
+
         }
+
+
 
         .header-content {
+
             position: relative;
+
             z-index: 1;
+
             text-align: center;
+
         }
+
+
 
         .logo {
+
             display: flex;
+
             align-items: center;
+
             justify-content: center;
+
             gap: 15px;
+
             margin-bottom: 1rem;
+
         }
 
-        .logo i {
+
+
+        .logo .logo-icon {
+
             font-size: 2.5rem;
+
             color: #ffd700;
+
         }
+
+
 
         h1 {
+
             font-size: 2.5rem;
+
             font-weight: 700;
+
             margin-bottom: 0.5rem;
+
         }
+
+
 
         .subtitle {
+
             font-size: 1.1rem;
+
             opacity: 0.9;
+
             max-width: 800px;
+
             margin: 0 auto;
+
         }
+
+
 
         .stats {
+
             display: flex;
+
             justify-content: center;
+
             gap: 2rem;
+
             margin-top: 1.5rem;
+
             flex-wrap: wrap;
+
         }
+
+
 
         .stat-item {
+
             background: rgba(255, 255, 255, 0.15);
+
             padding: 0.75rem 1.5rem;
+
             border-radius: var(--radius);
+
             backdrop-filter: blur(10px);
+
         }
+
+
 
         .stat-value {
+
             font-size: 1.5rem;
+
             font-weight: 700;
+
             color: #ffd700;
+
         }
+
+
 
         .stat-label {
+
             font-size: 0.9rem;
+
             opacity: 0.8;
+
         }
+
+
 
         .search-bar {
+
             margin: 2rem 0;
+
             position: relative;
+
         }
+
+
 
         .search-input {
+
             width: 100%;
+
             padding: 1rem 1.5rem;
+
             padding-left: 3rem;
+
             border: none;
+
             border-radius: var(--radius);
+
             font-size: 1rem;
+
             box-shadow: var(--shadow);
+
             transition: all 0.3s ease;
+
         }
+
+
 
         .search-input:focus {
+
             outline: none;
+
             box-shadow: 0 0 0 3px rgba(0, 113, 197, 0.3);
+
         }
+
+
 
         .search-icon {
+
             position: absolute;
+
             left: 1rem;
+
             top: 50%;
+
             transform: translateY(-50%);
+
             color: var(--gray);
+
         }
+
+
 
         .generations-grid {
+
             display: grid;
+
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+
             gap: 1.5rem;
+
             margin-bottom: 3rem;
+
         }
+
+
 
         .generation-card {
+
             background: white;
+
             border-radius: var(--radius-lg);
+
             overflow: hidden;
+
             box-shadow: var(--shadow);
+
             transition: all 0.3s ease;
+
             cursor: pointer;
+
             border: 1px solid var(--border);
+
         }
+
+
 
         .generation-card:hover {
+
             transform: translateY(-5px);
+
             box-shadow: var(--shadow-lg);
+
         }
+
+
 
         .card-header {
+
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+
             color: white;
+
             padding: 1.5rem;
+
         }
+
+
 
         .gen-name {
+
             font-size: 1.3rem;
+
             font-weight: 600;
+
             margin-bottom: 0.5rem;
+
         }
+
+
 
         .gen-years {
+
             font-size: 0.9rem;
+
             opacity: 0.9;
+
         }
+
+
 
         .card-body {
+
             padding: 1.5rem;
+
         }
+
+
 
         .gen-info {
+
             display: flex;
+
             flex-wrap: wrap;
+
             gap: 0.75rem;
+
             margin-bottom: 1rem;
+
         }
+
+
 
         .info-tag {
+
             background: var(--gray-light);
+
             padding: 0.25rem 0.75rem;
+
             border-radius: 20px;
+
             font-size: 0.85rem;
+
             color: var(--dark);
+
         }
+
+
 
         .cpu-list {
+
             margin-top: 1rem;
+
         }
+
+
 
         .cpu-item {
+
             display: flex;
+
             justify-content: space-between;
+
             align-items: center;
+
             padding: 0.75rem;
+
             border-bottom: 1px solid var(--border);
+
             transition: background 0.2s ease;
+
         }
+
+
 
         .cpu-item:last-child {
+
             border-bottom: none;
+
         }
+
+
 
         .cpu-item:hover {
+
             background: var(--gray-light);
+
         }
+
+
 
         .cpu-model {
+
             font-weight: 500;
+
             color: var(--dark);
+
         }
+
+
 
         .cpu-specs {
+
             font-size: 0.85rem;
+
             color: var(--gray);
+
         }
+
+
 
         .view-details {
+
             display: inline-block;
+
             margin-top: 1rem;
+
             color: var(--primary);
+
             font-weight: 500;
+
             text-decoration: none;
+
             transition: color 0.2s ease;
+
         }
+
+
 
         .view-details:hover {
+
             color: var(--primary-dark);
+
             text-decoration: underline;
+
         }
+
+
 
         footer {
+
             text-align: center;
+
             padding: 2rem 0;
+
             color: var(--gray);
+
             font-size: 0.9rem;
+
             border-top: 1px solid var(--border);
+
             margin-top: 3rem;
+
         }
+
+
 
         .footer-links {
+
             display: flex;
+
             justify-content: center;
+
             gap: 1.5rem;
+
             margin-top: 1rem;
+
         }
+
+
 
         .footer-link {
+
             color: var(--primary);
+
             text-decoration: none;
+
         }
+
+
 
         .footer-link:hover {
+
             text-decoration: underline;
+
         }
+
+
 
         .modal {
+
             display: none;
+
             position: fixed;
+
             top: 0;
+
             left: 0;
+
             width: 100%;
+
             height: 100%;
+
             background: rgba(0, 0, 0, 0.7);
+
             z-index: 1000;
+
             overflow-y: auto;
+
         }
+
+
 
         .modal-content {
+
             background: white;
+
             max-width: 800px;
+
             margin: 2rem auto;
+
             border-radius: var(--radius-lg);
+
             box-shadow: var(--shadow-lg);
+
             animation: modalFadeIn 0.3s ease;
+
         }
+
+
 
         @keyframes modalFadeIn {
+
             from { opacity: 0; transform: translateY(-20px); }
+
             to { opacity: 1; transform: translateY(0); }
+
         }
+
+
 
         .modal-header {
+
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+
             color: white;
+
             padding: 1.5rem;
+
             border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+
             display: flex;
+
             justify-content: space-between;
+
             align-items: center;
+
         }
+
+
 
         .modal-title {
+
             font-size: 1.5rem;
+
             font-weight: 600;
+
         }
+
+
 
         .modal-close {
+
             background: none;
+
             border: none;
+
             color: white;
+
             font-size: 1.5rem;
+
             cursor: pointer;
+
             padding: 0;
+
             width: 30px;
+
             height: 30px;
+
             display: flex;
+
             align-items: center;
+
             justify-content: center;
+
             border-radius: 50%;
+
             transition: background 0.2s ease;
+
         }
+
+
 
         .modal-close:hover {
+
             background: rgba(255, 255, 255, 0.2);
+
         }
+
+
 
         .modal-body {
+
             padding: 2rem;
+
         }
+
+
 
         .cpu-detail-header {
+
             display: flex;
+
             justify-content: space-between;
+
             align-items: center;
+
             margin-bottom: 2rem;
+
             padding-bottom: 1rem;
+
             border-bottom: 2px solid var(--border);
+
         }
+
+
 
         .cpu-title {
+
             font-size: 2rem;
+
             font-weight: 700;
+
             color: var(--dark);
+
         }
+
+
 
         .cpu-badge {
+
             background: var(--primary);
+
             color: white;
+
             padding: 0.5rem 1rem;
+
             border-radius: 20px;
+
             font-weight: 600;
+
         }
+
+
 
         .specs-grid {
+
             display: grid;
+
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+
             gap: 1.5rem;
+
             margin-bottom: 2rem;
+
         }
+
+
 
         .spec-card {
+
             background: var(--light);
+
             padding: 1.5rem;
+
             border-radius: var(--radius);
+
             border-left: 4px solid var(--primary);
+
         }
+
+
 
         .spec-label {
+
             font-size: 0.9rem;
+
             color: var(--gray);
+
             margin-bottom: 0.5rem;
+
         }
+
+
 
         .spec-value {
+
             font-size: 1.2rem;
+
             font-weight: 600;
+
             color: var(--dark);
+
         }
+
+
 
         .highlight {
+
             background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+
             padding: 1.5rem;
+
             border-radius: var(--radius);
+
             margin-bottom: 2rem;
+
         }
+
+
 
         .highlight-title {
+
             font-size: 1.2rem;
+
             font-weight: 600;
+
             margin-bottom: 0.5rem;
+
             color: #856404;
+
         }
+
+
 
         .back-button {
+
             display: inline-block;
+
             background: var(--primary);
+
             color: white;
+
             padding: 0.75rem 1.5rem;
+
             border-radius: var(--radius);
+
             text-decoration: none;
+
             font-weight: 500;
+
             transition: background 0.2s ease;
+
             border: none;
+
             cursor: pointer;
+
             font-size: 1rem;
+
         }
+
+
 
         .back-button:hover {
+
             background: var(--primary-dark);
+
         }
+
+
 
         @media (max-width: 768px) {
+
             .generations-grid {
+
                 grid-template-columns: 1fr;
+
             }
+
             
+
             .specs-grid {
+
                 grid-template-columns: 1fr;
+
             }
+
             
+
             h1 {
+
                 font-size: 2rem;
+
             }
+
             
+
             .stats {
+
                 gap: 1rem;
+
             }
+
         }
+
+
 
         .loading {
+
             text-align: center;
+
             padding: 2rem;
+
             color: var(--gray);
+
         }
+
+
 
         .no-results {
+
             text-align: center;
+
             padding: 3rem;
+
             color: var(--gray);
+
             font-size: 1.1rem;
+
         }
+
     </style>
+
 </head>
+
 <body>
-    <div class="container">
+
+    <div class=container>
+
         <header>
-            <div class="header-content">
-                <div class="logo">
-                    <i class="fas fa-microchip"></i>
+
+            <div class=header-content>
+
+                <div class=logo>
+
+                    <span class=logo-icon>&#9881;</span>
+
                 </div>
-                <h1>Intel CPU 鏁版嵁搴?/h1>
-                <p class="subtitle">鏀跺綍 Intel 杩戜簩鍗佸勾锛?005-2025锛夊彂甯冪殑鎵€鏈変富娴佹闈㈠拰绗旇鏈鐞嗗櫒锛屾寜浠ｉ檯鍒嗙被灞曠ず锛屾彁渚涜缁嗚鏍煎姣?/p>
-                <div class="stats">
-                    <div class="stat-item">
-                        <div class="stat-value" id="total-generations">15</div>
-                        <div class="stat-label">澶勭悊鍣ㄤ唬闄?/div>
+
+                <h1>Intel CPU 数据库</h1>
+
+                <p class=subtitle>收录 Intel 近二十年（2005-2025）发布的所有主流桌面和笔记本处理器，按代际分类展示，提供详细规格对比</p>
+
+                <div class=stats>
+
+                    <div class=stat-item>
+
+                        <div class=stat-value id=total-generations>15</div>
+
+                        <div class=stat-label>处理器代际</div>
+
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-value" id="total-cpus">45+</div>
-                        <div class="stat-label">CPU 鍨嬪彿</div>
+
+                    <div class=stat-item>
+
+                        <div class=stat-value id=total-cpus>125+</div>
+
+                        <div class=stat-label>CPU 型号</div>
+
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-value">20骞?/div>
-                        <div class="stat-label">鏃堕棿璺ㄥ害</div>
+
+                    <div class=stat-item>
+
+                        <div class=stat-value>20年</div>
+
+                        <div class=stat-label>时间跨度</div>
+
                     </div>
+
                 </div>
+
             </div>
+
         </header>
 
-        <div class="search-bar">
-            <i class="fas fa-search search-icon"></i>
-            <input type="text" class="search-input" id="searchInput" placeholder="鎼滅储 CPU 鍨嬪彿鎴栦唬闄?(濡?'i7-9700K' 鎴?'Coffee Lake')...">
+
+
+        <div class=search-bar>
+
+            <span class=search-icon>&#128269;</span>
+
+            <input type=text class=search-input id=searchInput placeholder=搜索 CPU 型号或代际 (如 'i7-9700K' 或 'Coffee Lake')...>
+
         </div>
 
-        <div id="generationsContainer" class="generations-grid">
-            <!-- 浠ｉ檯鍗＄墖灏嗛€氳繃 JavaScript 鍔ㄦ€佺敓鎴?-->
+
+
+        <div id=generationsContainer class=generations-grid>
+
+            <!-- 代际卡片将通过 JavaScript 动态生成 -->
+
         </div>
 
-        <div id="noResults" class="no-results" style="display: none;">
-            <i class="fas fa-search fa-2x" style="margin-bottom: 1rem;"></i>
-            <h3>鏈壘鍒板尮閰嶇殑 CPU</h3>
-            <p>璇峰皾璇曞叾浠栨悳绱㈠叧閿瘝</p>
+
+
+        <div id=noResults class=no-results style=display: none;>
+
+            <span style=font-size:2rem;margin-bottom:1rem;>&#128269;</span>
+
+            <h3>未找到匹配的 CPU</h3>
+
+            <p>请尝试其他搜索关键词</p>
+
         </div>
+
+
 
         <footer>
-            <p>Intel CPU 鏁版嵁搴?&copy; 2025 - 鍩轰簬鍏紑鏁版嵁鏁寸悊锛屼粎渚涘弬鑰?/p>
-            <div class="footer-links">
-                <a href="https://www.intel.com" class="footer-link" target="_blank">Intel 瀹樼綉</a>
-                <a href="https://ark.intel.com" class="footer-link" target="_blank">Intel ARK</a>
-                <a href="#" class="footer-link" onclick="showAbout()">鍏充簬鏈珯</a>
+
+            <p>Intel CPU 数据库 &copy; 2025 - 基于公开数据整理，仅供参考</p>
+
+            <div class=footer-links>
+
+                <a href=https://www.intel.com class=footer-link target=_blank>Intel 官网</a>
+
+                <a href=https://ark.intel.com class=footer-link target=_blank>Intel ARK</a>
+
+                <a href=# class=footer-link onclick=showAbout()>关于本站</a>
+
             </div>
+
         </footer>
+
     </div>
 
-    <!-- CPU 璇︽儏妯℃€佹 -->
-    <div id="cpuModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title" id="modalTitle">CPU 璇︽儏</h2>
-                <button class="modal-close" onclick="closeModal()">&times;</button>
+
+
+    <!-- CPU 详情模态框 -->
+
+    <div id=cpuModal class=modal>
+
+        <div class=modal-content>
+
+            <div class=modal-header>
+
+                <h2 class=modal-title id=modalTitle>CPU 详情</h2>
+
+                <button class=modal-close onclick=closeModal()>&times;</button>
+
             </div>
-            <div class="modal-body" id="modalBody">
-                <!-- 璇︽儏鍐呭灏嗛€氳繃 JavaScript 鍔ㄦ€佺敓鎴?-->
+
+            <div class=modal-body id=modalBody>
+
+                <!-- 详情内容将通过 JavaScript 动态生成 -->
+
             </div>
+
         </div>
+
     </div>
 
-    <!-- 鍏充簬妯℃€佹 -->
-    <div id="aboutModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">鍏充簬鏈珯</h2>
-                <button class="modal-close" onclick="closeAboutModal()">&times;</button>
+
+
+    <!-- 关于模态框 -->
+
+    <div id=aboutModal class=modal>
+
+        <div class=modal-content>
+
+            <div class=modal-header>
+
+                <h2 class=modal-title>关于本站</h2>
+
+                <button class=modal-close onclick=closeAboutModal()>&times;</button>
+
             </div>
-            <div class="modal-body">
-                <div class="spec-card">
-                    <h3>Intel CPU 鏁版嵁搴?/h3>
-                    <p>鏈珯鏀堕泦鏁寸悊浜?Intel 杩戜簩鍗佸勾锛?005-2025锛夊彂甯冪殑鎵€鏈変富娴佹闈㈠拰绗旇鏈?CPU锛屾棬鍦ㄤ负纭欢鐖卞ソ鑰呫€丏IY 鐜╁鍜屾櫘閫氱敤鎴锋彁渚涗竴涓洿瑙傜殑澶勭悊鍣ㄥ巻鍙叉暟鎹簱銆?/p>
+
+            <div class=modal-body>
+
+                <div class=spec-card>
+
+                    <h3>Intel CPU 数据库</h3>
+
+                    <p>本站收集整理了 Intel 近二十年（2005-2025）发布的所有主流桌面和笔记本 CPU，旨在为硬件爱好者、DIY 玩家和普通用户提供一个直观的处理器历史数据库。</p>
+
                 </div>
+
                 
-                <div class="spec-card">
-                    <h3>鏁版嵁鏉ユ簮</h3>
-                    <p>鏁版嵁鍩轰簬 Intel 瀹樻柟 ARK 鏁版嵁搴撱€佹妧鏈枃妗ｅ拰鍏紑璇勬祴璧勬枡鏁寸悊銆傚寘鍚粠 Core 2 Duo 鍒版渶鏂?Core Ultra 绯诲垪鐨勫畬鏁翠唬闄呮紨杩涖€?/p>
+
+                <div class=spec-card>
+
+                    <h3>数据来源</h3>
+
+                    <p>数据基于 Intel 官方 ARK 数据库、技术文档和公开评测资料整理。包含从 Core 2 Duo 到最新 Core Ultra 系列的完整代际演进。</p>
+
                 </div>
+
                 
-                <div class="spec-card">
-                    <h3>涓昏鐗规€?/h3>
+
+                <div class=spec-card>
+
+                    <h3>主要特性</h3>
+
                     <ul>
-                        <li>15 涓鐞嗗櫒浠ｉ檯鍒嗙被灞曠ず</li>
-                        <li>45+ 娆句唬琛ㄦ€?CPU 鍨嬪彿</li>
-                        <li>璇︾粏瑙勬牸鍙傛暟瀵规瘮</li>
-                        <li>鍝嶅簲寮忚璁★紝鏀寔绉诲姩璁惧</li>
-                        <li>鏃犻渶鍚庣锛岀函闈欐€佺綉绔?/li>
+
+                        <li>15 个处理器代际分类展示</li>
+
+                        <li>125+ 款代表性 CPU 型号</li>
+
+                        <li>详细规格参数对比</li>
+
+                        <li>响应式设计，支持移动设备</li>
+
+                        <li>无需后端，纯静态网站</li>
+
                     </ul>
+
                 </div>
+
                 
-                <div class="spec-card">
-                    <h3>鎶€鏈爤</h3>
-                    <p>HTML5 + CSS3 + Vanilla JavaScript<br>绾墠绔疄鐜帮紝鏁版嵁瀛樺偍鍦ㄦ湰鍦?JSON 鏂囦欢</p>
+
+                <div class=spec-card>
+
+                    <h3>技术栈</h3>
+
+                    <p>HTML5 + CSS3 + Vanilla JavaScript<br>纯前端实现，数据存储在本地 JSON 文件</p>
+
                 </div>
+
                 
-                <button class="back-button" onclick="closeAboutModal()" style="margin-top: 1rem;">鍏抽棴</button>
+
+                <button class=back-button onclick=closeAboutModal() style=margin-top: 1rem;>关闭</button>
+
             </div>
+
         </div>
+
     </div>
 
-    <script src="data.js"></script>
+
+
+    <script src=data.js?v=20250603></script>
+
     <script>
-        // 鍏ㄥ眬鍙橀噺
+
+        // 全局变量
+
         let allGenerations = [];
+
         let filteredGenerations = [];
 
-        // 鍒濆鍖?        document.addEventListener('DOMContentLoaded', function() {
+
+
+        // 初始化
+
+        document.addEventListener('DOMContentLoaded', function() {
+
             if (typeof INTEL_CPU_DATA !== 'undefined') {
+
                 allGenerations = INTEL_CPU_DATA.generations;
+
                 filteredGenerations = [...allGenerations];
+
                 renderGenerations();
+
                 setupSearch();
+
                 updateStats();
+
             }
+
         });
 
-        // 娓叉煋浠ｉ檯鍗＄墖
+
+
+        // 渲染代际卡片
+
         function renderGenerations() {
+
             const container = document.getElementById('generationsContainer');
+
             const noResults = document.getElementById('noResults');
+
             
+
             if (filteredGenerations.length === 0) {
+
                 container.innerHTML = '';
+
                 noResults.style.display = 'block';
+
                 return;
+
             }
+
             
+
             noResults.style.display = 'none';
+
             container.innerHTML = '';
+
             
+
             filteredGenerations.forEach(gen => {
+
                 const card = document.createElement('div');
+
                 card.className = 'generation-card';
+
                 card.dataset.genId = gen.id;
+
                 
-                // 璁＄畻璇ヤ唬闄呯殑 CPU 鏁伴噺
+
+                // 计算该代际的 CPU 数量
+
                 const cpuCount = gen.cpus ? gen.cpus.length : 0;
+
                 
+
                 card.innerHTML = `
-                    <div class="card-header">
-                        <div class="gen-name">${gen.name}</div>
-                        <div class="gen-years">${gen.years}</div>
+
+                    <div class=card-header>
+
+                        <div class=gen-name>${gen.name}</div>
+
+                        <div class=gen-years>${gen.years}</div>
+
                     </div>
-                    <div class="card-body">
-                        <div class="gen-info">
-                            <span class="info-tag">${gen.codeName}</span>
-                            <span class="info-tag">${gen.processNodes.join(' / ')}</span>
-                            <span class="info-tag">${gen.socket}</span>
+
+                    <div class=card-body>
+
+                        <div class=gen-info>
+
+                            <span class=info-tag>${gen.codeName}</span>
+
+                            <span class=info-tag>${gen.processNodes.join(' / ')}</span>
+
+                            <span class=info-tag>${gen.socket}</span>
+
                         </div>
-                        <p style="color: var(--gray); font-size: 0.9rem; margin-bottom: 1rem;">${gen.highlights}</p>
+
+                        <p style=color: var(--gray); font-size: 0.9rem; margin-bottom: 1rem;>${gen.highlights}</p>
+
                         
-                        <div class="cpu-list">
+
+                        <div class=cpu-list>
+
                             ${gen.cpus ? gen.cpus.slice(0, 3).map(cpu => `
-                                <div class="cpu-item" onclick="showCpuDetail('${gen.id}', '${cpu.model}')">
-                                    <div class="cpu-model">${cpu.model}</div>
-                                    <div class="cpu-specs">${cpu.cores}鏍?{cpu.threads}绾跨▼</div>
+
+                                <div class=cpu-item onclick=showCpuDetail('${gen.id}', '${cpu.model}')>
+
+                                    <div class=cpu-model>${cpu.model}</div>
+
+                                    <div class=cpu-specs>${cpu.cores}核${cpu.threads}线程</div>
+
                                 </div>
+
                             `).join('') : ''}
+
                         </div>
+
                         
-                        ${cpuCount > 3 ? `<div style="text-align: center; padding: 0.5rem; color: var(--primary); font-size: 0.9rem;">+ ${cpuCount - 3} 涓瀷鍙?/div>` : ''}
+
+                        ${cpuCount > 3 ? `<div style=text-align: center; padding: 0.5rem; color: var(--primary); font-size: 0.9rem;>+ ${cpuCount - 3} 个型号</div>` : ''}
+
                         
-                        <a href="#" class="view-details" onclick="showGenerationDetail('${gen.id}')">鏌ョ湅鍏ㄩ儴鍨嬪彿</a>
+
+                        <a href=# class=view-details onclick=showGenerationDetail('${gen.id}')>查看全部型号</a>
+
                     </div>
+
                 `;
+
                 
+
                 container.appendChild(card);
+
             });
+
         }
 
-        // 璁剧疆鎼滅储鍔熻兘
+
+
+        // 设置搜索功能
+
         function setupSearch() {
+
             const searchInput = document.getElementById('searchInput');
+
             
+
             searchInput.addEventListener('input', function() {
+
                 const searchTerm = this.value.toLowerCase().trim();
+
                 
+
                 if (searchTerm === '') {
+
                     filteredGenerations = [...allGenerations];
+
                 } else {
+
                     filteredGenerations = allGenerations.filter(gen => {
-                        // 鎼滅储浠ｉ檯鍚嶇О銆佷唬鍙枫€佸勾浠?                        if (gen.name.toLowerCase().includes(searchTerm) ||
+
+                        // 搜索代际名称、代号、年份
+
+                        if (gen.name.toLowerCase().includes(searchTerm) ||
+
                             gen.codeName.toLowerCase().includes(searchTerm) ||
+
                             gen.years.toLowerCase().includes(searchTerm) ||
+
                             gen.socket.toLowerCase().includes(searchTerm)) {
+
                             return true;
+
                         }
+
                         
-                        // 鎼滅储璇ヤ唬闄呬笅鐨?CPU 鍨嬪彿
+
+                        // 搜索该代际下的 CPU 型号
+
                         if (gen.cpus) {
+
                             return gen.cpus.some(cpu => 
+
                                 cpu.model.toLowerCase().includes(searchTerm) ||
+
                                 cpu.brand.toLowerCase().includes(searchTerm)
+
                             );
+
                         }
+
                         
+
                         return false;
+
                     });
+
                 }
+
                 
+
                 renderGenerations();
+
                 updateStats();
+
             });
+
         }
 
-        // 鏇存柊缁熻淇℃伅
+
+
+        // 更新统计信息
+
         function updateStats() {
+
             const totalCpus = filteredGenerations.reduce((sum, gen) => {
+
                 return sum + (gen.cpus ? gen.cpus.length : 0);
+
             }, 0);
+
             
+
             document.getElementById('total-generations').textContent = filteredGenerations.length;
+
             document.getElementById('total-cpus').textContent = totalCpus + '+';
+
         }
 
-        // 鏄剧ず浠ｉ檯璇︽儏
+
+
+        // 显示代际详情
+
         function showGenerationDetail(genId) {
+
             const gen = allGenerations.find(g => g.id === genId);
+
             if (!gen) return;
+
             
+
             const modal = document.getElementById('cpuModal');
+
             const modalTitle = document.getElementById('modalTitle');
+
             const modalBody = document.getElementById('modalBody');
+
             
+
             modalTitle.textContent = `${gen.name} (${gen.years})`;
+
             
+
             let cpuListHTML = '';
+
             if (gen.cpus && gen.cpus.length > 0) {
+
                 cpuListHTML = gen.cpus.map(cpu => `
-                    <div class="cpu-item" style="cursor: pointer;" onclick="showCpuDetail('${genId}', '${cpu.model}')">
+
+                    <div class=cpu-item style=cursor: pointer; onclick=showCpuDetail('${genId}', '${cpu.model}')>
+
                         <div>
-                            <div class="cpu-model">${cpu.model}</div>
-                            <div style="font-size: 0.85rem; color: var(--gray); margin-top: 0.25rem;">
-                                ${cpu.brand} | ${cpu.cores}鏍?{cpu.threads}绾跨▼ | ${cpu.baseClock} | ${cpu.tdp}
+
+                            <div class=cpu-model>${cpu.model}</div>
+
+                            <div style=font-size: 0.85rem; color: var(--gray); margin-top: 0.25rem;>
+
+                                ${cpu.brand} | ${cpu.cores}核${cpu.threads}线程 | ${cpu.baseClock} | ${cpu.tdp}
+
                             </div>
+
                         </div>
-                        <div style="color: var(--primary); font-size: 0.9rem;">
-                            <i class="fas fa-chevron-right"></i>
+
+                        <div style=color: var(--primary); font-size: 0.9rem;>
+
+                            <span>&#8250;</span>
+
                         </div>
+
                     </div>
+
                 `).join('');
+
             }
+
             
+
             modalBody.innerHTML = `
-                <div class="spec-card">
-                    <div class="spec-label">浠ｅ彿</div>
-                    <div class="spec-value">${gen.codeName}</div>
+
+                <div class=spec-card>
+
+                    <div class=spec-label>代号</div>
+
+                    <div class=spec-value>${gen.codeName}</div>
+
                 </div>
+
                 
-                <div class="spec-card">
-                    <div class="spec-label">鍒剁▼宸ヨ壓</div>
-                    <div class="spec-value">${gen.processNodes.join(' / ')}</div>
+
+                <div class=spec-card>
+
+                    <div class=spec-label>制程工艺</div>
+
+                    <div class=spec-value>${gen.processNodes.join(' / ')}</div>
+
                 </div>
+
                 
-                <div class="spec-card">
-                    <div class="spec-label">鎻掓Ы绫诲瀷</div>
-                    <div class="spec-value">${gen.socket}</div>
+
+                <div class=spec-card>
+
+                    <div class=spec-label>插槽类型</div>
+
+                    <div class=spec-value>${gen.socket}</div>
+
                 </div>
+
                 
-                <div class="spec-card">
-                    <div class="spec-label">鏋舵瀯</div>
-                    <div class="spec-value">${gen.architecture}</div>
+
+                <div class=spec-card>
+
+                    <div class=spec-label>架构</div>
+
+                    <div class=spec-value>${gen.architecture}</div>
+
                 </div>
+
                 
-                <div class="highlight">
-                    <div class="highlight-title">浠ｉ檯浜偣</div>
+
+                <div class=highlight>
+
+                    <div class=highlight-title>代际亮点</div>
+
                     <p>${gen.highlights}</p>
+
                 </div>
+
                 
-                <h3 style="margin: 1.5rem 0 1rem 0;">鍖呭惈鍨嬪彿 (${gen.cpus ? gen.cpus.length : 0}娆?</h3>
-                <div class="cpu-list">
-                    ${cpuListHTML || '<p style="color: var(--gray); text-align: center; padding: 2rem;">鏆傛棤鏁版嵁</p>'}
+
+                <h3 style=margin: 1.5rem 0 1rem 0;>包含型号 (${gen.cpus ? gen.cpus.length : 0}款)</h3>
+
+                <div class=cpu-list>
+
+                    ${cpuListHTML || '<p style=color: var(--gray); text-align: center; padding: 2rem;>暂无数据</p>'}
+
                 </div>
+
                 
-                <div style="text-align: center; margin-top: 2rem;">
-                    <button class="back-button" onclick="closeModal()">杩斿洖鍒楄〃</button>
+
+                <div style=text-align: center; margin-top: 2rem;>
+
+                    <button class=back-button onclick=closeModal()>返回列表</button>
+
                 </div>
+
             `;
+
             
+
             modal.style.display = 'block';
+
         }
 
-        // 鏄剧ず CPU 璇︽儏
+
+
+        // 显示 CPU 详情
+
         function showCpuDetail(genId, cpuModel) {
+
             const gen = allGenerations.find(g => g.id === genId);
+
             if (!gen) return;
+
             
+
             const cpu = gen.cpus.find(c => c.model === cpuModel);
+
             if (!cpu) return;
+
             
+
             const modal = document.getElementById('cpuModal');
+
             const modalTitle = document.getElementById('modalTitle');
+
             const modalBody = document.getElementById('modalBody');
+
             
+
             modalTitle.textContent = cpu.model;
+
             
-            // 鍒ゆ柇鏄惁鏀寔瓒呴
-            const overclockText = cpu.unlocked ? '鏀寔' : '涓嶆敮鎸?;
+
+            // 判断是否支持超频
+
+            const overclockText = cpu.unlocked ? '支持' : '不支持';
+
             const overclockClass = cpu.unlocked ? 'success' : 'secondary';
+
             
-            // 鍒ゆ柇鏄惁鏈夋贩鍚堟灦鏋?            const hasHybrid = cpu.pCores !== null && cpu.eCores !== null;
+
+            // 判断是否有混合架构
+
+            const hasHybrid = cpu.pCores !== null && cpu.eCores !== null;
+
             const coreDetail = hasHybrid ? 
-                `${cpu.pCores}P + ${cpu.eCores}E 鏍稿績` : 
-                `${cpu.cores} 鏍稿績`;
+
+                `${cpu.pCores}P + ${cpu.eCores}E 核心` : 
+
+                `${cpu.cores} 核心`;
+
             
+
             modalBody.innerHTML = `
-                <div class="cpu-detail-header">
+
+                <div class=cpu-detail-header>
+
                     <div>
-                        <div class="cpu-title">${cpu.model}</div>
-                        <div style="color: var(--gray); margin-top: 0.5rem;">${gen.name} | ${gen.years}</div>
+
+                        <div class=cpu-title>${cpu.model}</div>
+
+                        <div style=color: var(--gray); margin-top: 0.5rem;>${gen.name} | ${gen.years}</div>
+
                     </div>
-                    <div class="cpu-badge">${cpu.brand}</div>
+
+                    <div class=cpu-badge>${cpu.brand}</div>
+
                 </div>
+
                 
-                <div class="specs-grid">
-                    <div class="spec-card">
-                        <div class="spec-label">鏍稿績/绾跨▼</div>
-                        <div class="spec-value">${coreDetail} / ${cpu.threads}绾跨▼</div>
+
+                <div class=specs-grid>
+
+                    <div class=spec-card>
+
+                        <div class=spec-label>核心/线程</div>
+
+                        <div class=spec-value>${coreDetail} / ${cpu.threads}线程</div>
+
                     </div>
+
                     
-                    <div class="spec-card">
-                        <div class="spec-label">鍩虹棰戠巼</div>
-                        <div class="spec-value">${cpu.baseClock}</div>
+
+                    <div class=spec-card>
+
+                        <div class=spec-label>基础频率</div>
+
+                        <div class=spec-value>${cpu.baseClock}</div>
+
                     </div>
+
                     
-                    <div class="spec-card">
-                        <div class="spec-label">鏈€澶х澘棰?/div>
-                        <div class="spec-value">${cpu.boostClock}</div>
+
+                    <div class=spec-card>
+
+                        <div class=spec-label>最大睿频</div>
+
+                        <div class=spec-value>${cpu.boostClock}</div>
+
                     </div>
+
                     
-                    <div class="spec-card">
-                        <div class="spec-label">TDP</div>
-                        <div class="spec-value">${cpu.tdp}</div>
+
+                    <div class=spec-card>
+
+                        <div class=spec-label>TDP</div>
+
+                        <div class=spec-value>${cpu.tdp}</div>
+
                     </div>
+
                     
-                    <div class="spec-card">
-                        <div class="spec-label">鍒剁▼宸ヨ壓</div>
-                        <div class="spec-value">${cpu.process}</div>
+
+                    <div class=spec-card>
+
+                        <div class=spec-label>制程工艺</div>
+
+                        <div class=spec-value>${cpu.process}</div>
+
                     </div>
+
                     
-                    <div class="spec-card">
-                        <div class="spec-label">鎻掓Ы绫诲瀷</div>
-                        <div class="spec-value">${cpu.socket}</div>
+
+                    <div class=spec-card>
+
+                        <div class=spec-label>插槽类型</div>
+
+                        <div class=spec-value>${cpu.socket}</div>
+
                     </div>
+
                     
-                    <div class="spec-card">
-                        <div class="spec-label">闆嗘垚鏄惧崱</div>
-                        <div class="spec-value">${cpu.igpu}</div>
+
+                    <div class=spec-card>
+
+                        <div class=spec-label>集成显卡</div>
+
+                        <div class=spec-value>${cpu.igpu}</div>
+
                     </div>
+
                     
-                    <div class="spec-card">
-                        <div class="spec-label">瓒呴鏀寔</div>
-                        <div class="spec-value" style="color: ${cpu.unlocked ? 'var(--success)' : 'var(--secondary)'}">${overclockText}</div>
+
+                    <div class=spec-card>
+
+                        <div class=spec-label>超频支持</div>
+
+                        <div class=spec-value style=color: ${cpu.unlocked ? 'var(--success)' : 'var(--secondary)'}>${overclockText}</div>
+
                     </div>
+
                 </div>
+
                 
-                <div class="specs-grid">
-                    <div class="spec-card">
-                        <div class="spec-label">涓夌骇缂撳瓨</div>
-                        <div class="spec-value">${cpu.l3Cache}</div>
+
+                <div class=specs-grid>
+
+                    <div class=spec-card>
+
+                        <div class=spec-label>三级缓存</div>
+
+                        <div class=spec-value>${cpu.l3Cache}</div>
+
                     </div>
+
                     
-                    <div class="spec-card">
-                        <div class="spec-label">鍐呭瓨鏀寔</div>
-                        <div class="spec-value">${cpu.memorySupport}</div>
+
+                    <div class=spec-card>
+
+                        <div class=spec-label>内存支持</div>
+
+                        <div class=spec-value>${cpu.memorySupport}</div>
+
                     </div>
+
                     
-                    <div class="spec-card">
-                        <div class="spec-label">鏈€澶у唴瀛?/div>
-                        <div class="spec-value">${cpu.maxMemory}</div>
+
+                    <div class=spec-card>
+
+                        <div class=spec-label>最大内存</div>
+
+                        <div class=spec-value>${cpu.maxMemory}</div>
+
                     </div>
+
                     
-                    <div class="spec-card">
-                        <div class="spec-label">鍙戝竷鏃ユ湡</div>
-                        <div class="spec-value">${cpu.releaseDate}</div>
+
+                    <div class=spec-card>
+
+                        <div class=spec-label>发布日期</div>
+
+                        <div class=spec-value>${cpu.releaseDate}</div>
+
                     </div>
+
                 </div>
+
                 
-                <div class="highlight">
-                    <div class="highlight-title">浠ｉ檯浜偣</div>
+
+                <div class=highlight>
+
+                    <div class=highlight-title>代际亮点</div>
+
                     <p>${gen.highlights}</p>
+
                 </div>
+
                 
-                <div style="text-align: center; margin-top: 2rem;">
-                    <button class="back-button" onclick="showGenerationDetail('${genId}')" style="margin-right: 1rem;">杩斿洖浠ｉ檯</button>
-                    <button class="back-button" onclick="closeModal()">杩斿洖鍒楄〃</button>
+
+                <div style=text-align: center; margin-top: 2rem;>
+
+                    <button class=back-button onclick=showGenerationDetail('${genId}') style=margin-right: 1rem;>返回代际</button>
+
+                    <button class=back-button onclick=closeModal()>返回列表</button>
+
                 </div>
+
             `;
+
             
+
             modal.style.display = 'block';
+
         }
 
-        // 鍏抽棴妯℃€佹
+
+
+        // 关闭模态框
+
         function closeModal() {
+
             document.getElementById('cpuModal').style.display = 'none';
+
         }
 
-        // 鏄剧ず鍏充簬妯℃€佹
+
+
+        // 显示关于模态框
+
         function showAbout() {
+
             document.getElementById('aboutModal').style.display = 'block';
+
         }
 
-        // 鍏抽棴鍏充簬妯℃€佹
+
+
+        // 关闭关于模态框
+
         function closeAboutModal() {
+
             document.getElementById('aboutModal').style.display = 'none';
+
         }
 
-        // 鐐瑰嚮妯℃€佹澶栭儴鍏抽棴
+
+
+        // 点击模态框外部关闭
+
         window.onclick = function(event) {
+
             const modals = document.querySelectorAll('.modal');
+
             modals.forEach(modal => {
+
                 if (event.target === modal) {
+
                     modal.style.display = 'none';
+
                 }
+
             });
+
         }
+
     </script>
+
 </body>
+
 </html>
