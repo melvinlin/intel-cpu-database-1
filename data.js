@@ -1,4 +1,4 @@
-const INTEL_CPU_DATA = {
+onst INTEL_CPU_DATA = {
   "generations": [
     {
       "id": "core2",
